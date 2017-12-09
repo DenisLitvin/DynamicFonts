@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'DynamicFonts_Example' do
+  pod 'DynamicFonts', :path => '../'
+
+  target 'DynamicFonts_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
+end
