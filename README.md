@@ -5,20 +5,43 @@
 [![License](https://img.shields.io/cocoapods/l/DynamicFonts.svg?style=flat)](http://cocoapods.org/pods/DynamicFonts)
 [![Platform](https://img.shields.io/cocoapods/p/DynamicFonts.svg?style=flat)](http://cocoapods.org/pods/DynamicFonts)
 
+## Usage
+
+There are two static methods on `UIFont`:
+1. `UIFont.fixSized(_ size: CGFloat, family: FontTextFamily)` - creates fix sized font with required font size and font family
+2. `UIFont.dynamicallySized(for textStyle: FontTextStyle, family: FontTextFamily)` - creates dynamically sized font for certain text style.
+
+**Parameters for `FontTextStyle`:**
+- `head(type)`
+- `body(type)`
+- `caption(type)`
+
+`type` represents the type of text you can choose from the following:
+
+- extraSmall
+- small
+- medium
+- large
+
+**Parameters for `FontTextFamily`: All the embedded font families, if you want it to support custom one, add `case` to `FontTextFamily` enumeration**
+
+Also you can use `.bolded` and `.italicized` on the font.
+
 ## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+`textLabel.font = .dynamicallySized(for: .head(.medium), family: .avenir).bolded`
 
 ## Installation
 
-DynamicFonts is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+**CocoaPods:**
 
-```ruby
-pod 'DynamicFonts'
-```
+Add the line `pod "DynamicFonts"` to your `Podfile`
+
+**Manual:**
+
+Clone the repo and drag the file `DynamicFonts.swift` into your Xcode project.
+## Platform support
+
+- iOS 8 and above
 
 ## Author
 

@@ -1,0 +1,6 @@
+framework module DynamicFonts {
+  umbrella header "DynamicFonts-umbrella.h"
+
+  export *
+  module * { export * }
+}

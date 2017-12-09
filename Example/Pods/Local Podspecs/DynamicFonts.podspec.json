@@ -1,0 +1,22 @@
+{
+  "name": "DynamicFonts",
+  "version": "0.1.0",
+  "summary": "A short description of DynamicFonts.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/DenisLitvin/DynamicFonts",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "DenisLitvin": "den.litvinn@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/DenisLitvin/DynamicFonts.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "DynamicFonts/Classes/**/*"
+}
