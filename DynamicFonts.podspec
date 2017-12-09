@@ -30,7 +30,7 @@ This library helps to create dynamic and fixed size fonts programmaticaly, with 
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'NAME_OF_POD/Classes/**/*'
+  s.source_files = 'NAME_OF_POD/Classes/*.{h,m,swift}'
   
   # s.resource_bundles = {
   #   'DynamicallySizedText' => ['DynamicFonts/Assets/*.png']
