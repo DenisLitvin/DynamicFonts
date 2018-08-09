@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint DynamicallySizedText.podspec' to ensure this is a
+# Be sure to run `pod lib lint DynamicFonts.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -30,7 +30,7 @@ This library helps to create dynamic and fixed size fonts programmaticaly, with 
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'NAME_OF_POD/Classes/**/*'
+  s.source_files = 'DynamicFonts/Classes/**/*'
   
   # s.resource_bundles = {
   #   'DynamicallySizedText' => ['DynamicFonts/Assets/*.png']

@@ -7,6 +7,13 @@
 
 import UIKit
 
+
+extension String {
+    public func localized(comment: String = "") -> String {
+        return String(NSLocalizedString(self, comment: comment))
+    }
+}
+
 extension UIFont {
     
     public var bolded: UIFont {
@@ -18,42 +25,43 @@ extension UIFont {
         return fontDescriptor.withSymbolicTraits(.traitItalic)
             .map { UIFont(descriptor: $0, size: 0) } ?? self
     }
-    public static func fixSized(_ size: CGFloat, family: FontTextFamily) -> UIFont {
+    
+    private static var fontSizeMultiplier : CGFloat {
+        switch UIApplication.shared.preferredContentSizeCategory {
+        case UIContentSizeCategory.accessibilityExtraExtraExtraLarge: return 23 / 16
+        case UIContentSizeCategory.accessibilityExtraExtraLarge: return 22 / 16
+        case UIContentSizeCategory.accessibilityExtraLarge: return 21 / 16
+        case UIContentSizeCategory.accessibilityLarge: return 20 / 16
+        case UIContentSizeCategory.accessibilityMedium: return 19 / 16
+        case UIContentSizeCategory.extraExtraExtraLarge: return 19 / 16
+        case UIContentSizeCategory.extraExtraLarge: return 18 / 16
+        case UIContentSizeCategory.extraLarge: return 17 / 16
+        case UIContentSizeCategory.large: return 1.0
+        case UIContentSizeCategory.medium: return 15 / 16
+        case UIContentSizeCategory.small: return 14 / 16
+        case UIContentSizeCategory.extraSmall: return 13 / 16
+        default: return 1.0
+        }
+    }
+
+    public static func fixed(_ size: CGFloat, family: FontTextFamily) -> UIFont {
         let customFontDescriptor = UIFontDescriptor(fontAttributes: [
             UIFontDescriptor.AttributeName.family: family.rawValue,
             UIFontDescriptor.AttributeName.size: size])
         let font = UIFont(descriptor: customFontDescriptor, size: 0)
         return font
     }
-    public static func dynamicallySized(for textStyle: FontTextStyle, family: FontTextFamily) -> UIFont {
-        let fontSizeTable: [UIContentSizeCategory : CGFloat] = [
-            .accessibilityExtraExtraExtraLarge: 28,
-            .accessibilityExtraExtraLarge: 26,
-            .accessibilityExtraLarge: 24,
-            .accessibilityLarge: 22,
-            .accessibilityMedium: 20,
-            .extraExtraExtraLarge: 22,
-            .extraExtraLarge: 20,
-            .extraLarge: 18,
-            .large: 16,
-            .medium: 14,
-            .small: 12,
-            .extraSmall: 10
-        ]
-        let pointSizeForCategory = UIApplication.shared.preferredContentSizeCategory
-        if let defaultPointSize = fontSizeTable[pointSizeForCategory]{
-            
-            let pointSize = defaultPointSize * textStyle.multiplier
-            let customFontDescriptor = UIFontDescriptor(fontAttributes: [
-                UIFontDescriptor.AttributeName.family: family.rawValue,
-                UIFontDescriptor.AttributeName.size: pointSize])
-            let font = UIFont(descriptor: customFontDescriptor, size: 0)
-            print(font.pointSize)
-            return font
-        }
-        return UIFont()
+
+    public static func dynamic(_ size: CGFloat, family: FontTextFamily) -> UIFont {
+        let pointSize = size * fontSizeMultiplier
+        let customFontDescriptor = UIFontDescriptor(fontAttributes: [
+            UIFontDescriptor.AttributeName.family: family.rawValue,
+            UIFontDescriptor.AttributeName.size: pointSize])
+        let font = UIFont(descriptor: customFontDescriptor, size: 0)
+        return font
     }
 }
+
 public enum FontTextFamily: String {
     
     case proximaNova = "Proxima Nova"
@@ -136,60 +144,8 @@ public enum FontTextFamily: String {
     case banglaSangamMN = "Bangla Sangam MN"
     
 }
-public enum FontTextStyle {
-    
-    public enum type {
-        case extraSmall
-        case small
-        case medium
-        case large
-    }
-    
-    case head(type)
-    case body(type)
-    case caption(type)
-    
-    public var multiplier: CGFloat {
-        
-        let value: CGFloat
-        switch self {
-        case let .caption(type):
-            switch type{
-            case .extraSmall:
-                value = 0.66
-            case .small:
-                value = 0.79
-            case .medium:
-                value = 0.94
-            case .large:
-                value = 1.1
-            }
-        case let .body(type):
-            switch type{
-            case .extraSmall:
-                value = 1.2
-            case .small:
-                value = 1.3
-            case .medium:
-                value = 1.4
-            case .large:
-                value = 1.5
-            }
-        case let .head(type):
-            switch type{
-            case .extraSmall:
-                value = 1.63
-            case .small:
-                value = 1.81
-            case .medium:
-                value = 2
-            case .large:
-                value = 2.25
-            }
-        }
-        return value
-    }
-}
+
+
 
 
 
